@@ -1,0 +1,6 @@
+Requiriments:
+
+Python 3.13
+psycopg2 (lib para PostgreSQL)
+Flask
+PostgreSQL
