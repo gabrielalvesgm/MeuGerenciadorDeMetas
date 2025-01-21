@@ -77,5 +77,9 @@ Então criei uma pasta para testes dos CRUDS. Meu primeiro teste será com o tes
 **primeiro teste**: Testei o POST usuario e meta, o retorno foi um sucesso, o log me respondeu: ''Usuário criado com ID: 1, Meta criada com ID: 1"
     No postgreSQL, testei no query SELECT * FROM usuario; SELECT * FROM metas;
     o postgreSQL me respondeu com os dados do teste, portando foi um sucesso.
+    fiz este teste continuamente, criando diversos arquivos para testes singulares em aplicativo/tests/ realizei diversos testes CRUD, como GET, POST, DELETE.
+    Houveram vários erros mas a maioria foi fácil de resolver.
+Próximo passo será criar um tipo de ''validação'' para manter a segurança dos usuários e suas metas, também criar um sistema de lógica para evitar redundâncias e limitar os usuários e suas metas.
+**Criar uma página web utilizando HTML, CSS, JavaScript, implementar um sistema de registro e login com input para usuários utilizarem, sistema de visualização e manutenção de metas de cada usuário.
 
     
