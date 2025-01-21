@@ -18,5 +18,64 @@ MeuGerenciadorDeMetas/
 ├── requirements.txt        # Lista de dependências do projeto
 ├── README.md               # Documentação inicial
 
-Em aplicativo>config>database.py criamos os seguintes métodos CRUD:
-create_user, read_user, delete_user, create_meta, update_meta_status
+1. Pasta `aplicativo
+   Contém todo o código da aplicação. Essa pasta é o núcleo do projeto.
+
+   __init__.py
+     Marca a pasta como um módulo Python, permitindo importar e organizar pacotes.
+
+   Subpasta `config/`
+    `database.py` 
+       Configura e estabelece a conexão com o banco de dados PostgreSQL.  
+       Exemplo: funções para conectar ao banco e retornar um objeto de conexão para uso em outros módulos.
+
+   Subpasta `models/
+     Organiza as operações relacionadas ao banco de dados.
+    `usuario.py`
+       Implementa os CRUDs para manipular os dados na tabela `usuario`.
+    `meta.py`
+       Implementa os CRUDs para manipular os dados na tabela `metas`.
+
+    Subpasta `utils/ 
+    helpers.py
+       Contém funções auxiliares que podem ser reutilizadas em diferentes partes do código, como validações ou formatação de dados.
+
+    main.py 
+     O ponto de entrada da aplicação. Ele será responsável por iniciar o servidor Flask, configurar rotas e importar os módulos necessários.
+
+2.  requirements.txt  
+   Lista de dependências do projeto para que outras pessoas ou ambientes possam instalar os pacotes necessários.  
+   Exemplo: `flask`, `psycopg2-binary`, etc.
+
+3. README.md
+   Contém a documentação inicial do projeto, com explicação sobre o objetivo, como configurar e usar a aplicação.
+
+Fluxo Geral da Aplicação
+
+1. Configuração do Banco de Dados
+ database.py estabelece a conexão com o PostgreSQL e disponibiliza essa conexão para os outros módulos.
+
+Operações CRUD (Models)
+   - Os arquivos `usuario.py` e `meta.py` implementam as funcionalidades principais (criação, leitura, atualização e exclusão de dados) para as tabelas `usuario` e `metas`.
+
+Utilização das Funcionalidades no Flask 
+   - O arquivo `main.py`:
+     - Importa os métodos dos arquivos `usuario.py` e `meta.py`.
+     - Configura as rotas HTTP (como `/criar_usuario`, `/listar_metas`, etc.).
+     - Inicia o servidor Flask para receber requisições.
+
+Execução da Aplicação  
+   - Ao executar `main.py`, o servidor é iniciado, permitindo chamadas para as rotas configuradas, que interagem com os métodos nos arquivos de model.
+
+
+
+**Inicio do desenvolvimento do app e testes.**
+ Comecei estabelecendo a conexão com o PostgreSQL utilizando a lib psycopg2, foi criada a função create_conection.
+Após estabelecida a função, no PostgreSQL, criei duas tabelas (usuario, meta) onde foi definido id, user_id, nome_meta, descricao_meta, prazo_meta, status_meta, e para usuario: id, username, email e password.
+Após criado as tabelas no SQL, implementei CRUDS em models/usuario.py e meta.py, inicialmente criei as funções GET E POST para usuario e metas.
+Então criei uma pasta para testes dos CRUDS. Meu primeiro teste será com o test.create.py que servirá para função POST.
+**primeiro teste**: Testei o POST usuario e meta, o retorno foi um sucesso, o log me respondeu: ''Usuário criado com ID: 1, Meta criada com ID: 1"
+    No postgreSQL, testei no query SELECT * FROM usuario; SELECT * FROM metas;
+    o postgreSQL me respondeu com os dados do teste, portando foi um sucesso.
+
+    
