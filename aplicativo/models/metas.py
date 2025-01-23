@@ -1,3 +1,8 @@
+#metas.py
+#MÉTODOS CRUD PARA METAS
+
+
+
 # Método POST META
 def create_meta(connection, email, nome_meta, descricao_meta, prazo_meta):
     query = """INSERT INTO metas (user_id, nome_meta, descricao_meta, prazo_meta)
@@ -58,7 +63,7 @@ def delete_meta(connection, usuario_id, meta_id):
                 print("Meta deletada com sucesso!")
                 return True
             else:
-                print("Meta não encontrada ou não pertence ao usuário informado.")
+                print("Meta não encontrada ou não pertence a este usuário.")
                 return False
     except Exception as e:
         print(f"Erro ao deletar meta: {e}")
@@ -67,4 +72,31 @@ def delete_meta(connection, usuario_id, meta_id):
         if connection:
             cursor.close()
             connection.close()
+
+
+
+#MÉTODO PUT META
+def update_meta(connection, user_id, meta_id, campo, novo_valor):
     
+    #Verificando se o id da meta pertence ao usuário.
+    query_meta = "SELECT id FROM metas WHERE id = %s AND user_id = %s"
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query_meta, (meta_id, user_id))
+            meta = cursor.fetchone()
+
+            if not meta:
+                return "Meta não encontrada ou não pertence ao usuário."
+
+            #validação do campo que o usuário quer atualizar.
+            campos_validos = ["nome_meta", "descricao_meta", "prazo_meta", "status_meta"]
+            if campo not in campos_validos:
+                return "Campo inválido. Escolha entre: nome_meta, descricao_meta, prazo_meta, status_meta."
+
+            #atualizando a meta:
+            query_update = f"UPDATE metas SET {campo} = %s WHERE id = %s"
+            cursor.execute(query_update, (novo_valor, meta_id))
+            connection.commit()
+            return f"Campo '{campo}' atualizado com sucesso."
+    except Exception as e:
+        return f"Erro ao atualizar a meta: {e}"

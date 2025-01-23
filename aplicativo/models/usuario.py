@@ -1,4 +1,7 @@
 #usuarios.py
+#MÉTODOS CRUD PARA USER
+
+
 
 #Método POST USER
 def create_user(connection, username, email, password):
@@ -16,23 +19,32 @@ def create_user(connection, username, email, password):
     
     
 
-#Método GET USER
-def get_user_by_email(connection, email):
-    query = "SELECT id, nome FROM usuarios WHERE email = %s"
+# Método GET USER
+def get_user_by_email(connection, email, password):
+    query = "SELECT id, username, email, password FROM usuario WHERE email = %s"
     try:
         with connection.cursor() as cursor:
             cursor.execute(query, (email,))
-            return cursor.fetchone()
+            user = cursor.fetchone()
+            if user:
+                user_id, nome, email_armazenado, senha_armazenada = user
+                if password == senha_armazenada:  #if para validar se a senha esta correta.
+                    return {"id": user_id, "nome": nome, "email": email_armazenado}
+                else:
+                    return None  #senha errada.
+            else:
+                return None
     except Exception as e:
-        print(f"Erro ao buscar usuário pelo e-mail: {e}")
+        print(f"Erro ao buscar usuário pelo e-mail e senha: {e}")
         return None
+
 
     
     
 #Método DELETE USER
-def delete_user(connection, email, senha):
+def delete_user(connection, email, password):
     try:
-        query_user = "SELECT id, senha FROM usuarios WHERE email = %s"
+        query_user = "SELECT id, password FROM usuario WHERE email = %s"
         with connection.cursor() as cursor:
             cursor.execute(query_user, (email,))
             user = cursor.fetchone()
@@ -42,7 +54,7 @@ def delete_user(connection, email, senha):
 
             user_id, senha_armazenada = user
 
-            if senha != senha_armazenada:
+            if password != senha_armazenada:
                 return "Senha incorreta."
 
             query_metas = "SELECT COUNT(*) FROM metas WHERE user_id = %s"
@@ -50,9 +62,9 @@ def delete_user(connection, email, senha):
             metas_count = cursor.fetchone()[0]
 
             if metas_count > 0:
-                return "Só é possível deletar um usuário que tem metas ativas, é necessário deletar suas metas antes."
+                return "Este usuário possui metas ativas, delete-as antes."
 
-            query_delete_user = "DELETE FROM usuarios WHERE id = %s"
+            query_delete_user = "DELETE FROM usuario WHERE id = %s"
             cursor.execute(query_delete_user, (user_id,))
             connection.commit()
 

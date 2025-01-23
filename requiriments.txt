@@ -1,6 +1,7 @@
 Requiriments:
 
-Python 3.13
-psycopg2 (lib para PostgreSQL)
-Flask
-PostgreSQL
+Python 3.13 (linguagem principal)
+Flask (para a RestAPI)
+PostgreSQL (banco de dados utilizado)
+psycopg2 (lib para conexão com PostgreSQL)
+flask-jwt-extended (para controle de acesso e segurança)

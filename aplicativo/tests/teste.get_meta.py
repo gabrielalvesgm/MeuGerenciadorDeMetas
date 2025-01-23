@@ -5,12 +5,15 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 from aplicativo.config.database import create_connection
 from aplicativo.models.metas import get_metas_by_email
 
+
+
+#TESTE GET META
 def test_get_metas_by_email():
     connection = create_connection()
 
     if connection:
         try:
-            email = "teste@email.com"
+            email = "teste@email.com" #Email do usuário que quer ver as metas.
 
             metas = get_metas_by_email(connection, email)
 

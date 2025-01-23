@@ -7,14 +7,16 @@ MeuGerenciadorDeMetas/
 ├── aplicativo/
 │   ├── __init__.py         # Torna a pasta um módulo Python
 │   ├── config/
-│   │   └── database.py     # Configuração e conexão com o PostgreSQL
+│   │   ├── database.py     # Configuração e conexão com o PostgreSQL
+│   │   └── config.py       # Configurações gerais, incluindo JWT
 │   ├── models/
 │   │   ├── __init__.py     # Torna a pasta um módulo Python
 │   │   ├── usuario.py      # CRUD para a tabela Usuario
-│   │   └── meta.py         # CRUD para a tabela Metas
-│   ├── utils/
-│   │   └── helpers.py      # Funções auxiliares
-│   └── main.py             # Ponto de entrada da aplicação
+│   │   ├── metas.py        # CRUD para a tabela Metas
+│   │   └── auth.py         # Novo arquivo para autenticação
+│   ├── tests               # Página com todos os testes unitários
+│   ├── main.py             # Ponto de entrada principal do app
+│   └── routes.py           # Define as rotas da aplicação
 ├── requirements.txt        # Lista de dependências do projeto
 ├── README.md               # Documentação inicial
 
@@ -78,8 +80,12 @@ Então criei uma pasta para testes dos CRUDS. Meu primeiro teste será com o tes
     No postgreSQL, testei no query SELECT * FROM usuario; SELECT * FROM metas;
     o postgreSQL me respondeu com os dados do teste, portando foi um sucesso.
     fiz este teste continuamente, criando diversos arquivos para testes singulares em aplicativo/tests/ realizei diversos testes CRUD, como GET, POST, DELETE.
-    Houveram vários erros mas a maioria foi fácil de resolver.
+    Houveram alguns erros, porém, todos foram tratados e corrigidos facilmente.
+    nos testes de delete.user/meta, falta uma refinação do código.
 Próximo passo será criar um tipo de ''validação'' para manter a segurança dos usuários e suas metas, também criar um sistema de lógica para evitar redundâncias e limitar os usuários e suas metas.
+**Fazendo sistema de autenticação e segurança p login com o flask-jwt-extended
+criando e configurando o arquivo ''config.py'' que será o arquivo responsável pelas configurações do sistema.
+
 **Criar uma página web utilizando HTML, CSS, JavaScript, implementar um sistema de registro e login com input para usuários utilizarem, sistema de visualização e manutenção de metas de cada usuário.
 
     
