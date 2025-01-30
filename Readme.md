@@ -1,15 +1,31 @@
 Documentação da aplicação
-Oque é? a aplicação se trata de um gerenciador de metas, nele irei utilizar python como linguagem principal e postgreSQL como banco de dados, na aplicação o usuário poderá criar uma conta com username, senha e email, poderá criar metas com prazo e descrições, também poderá customizarlas como bem entender.
+
+Oque é o MyWay?
+O MyWay é um gerenciador de metas pessoais desenvolvido como uma API RESTful, permitindo que os usuários acompanhem seus objetivos de forma organizada e eficiente. A API foi construída utilizando Python com o microframework Flask, integrando PostgreSQL como banco de dados, utilizando psycopg2 para a comunicação entre o back-end e o banco de dados. Para segurança e autenticação, a API implementa um sistema baseado em JWT (JSON Web Tokens), utilizando a biblioteca Flask-JWT-Extended para gerenciamento de tokens.
+
+Para que serve o MyWay?
+O MyWay serve para ajudar os usuários a gerenciarem suas metas de forma personalizada. Cada usuário pode se registrar e fazer login, tendo acesso ao seu próprio perfil, onde pode criar, editar e excluir metas. Cada meta contém as seguintes informações:
+Título: Nome da meta.
+Descrição: Explicação detalhada do objetivo.
+Prazo: Data limite para conclusão.
+Prioridade: Nível de importância da meta.
+Além disso, o sistema utiliza tokens JWT para garantir segurança nas requisições e controle de sessão dos usuários, garantindo que apenas usuários autenticados possam acessar e modificar seus dados.
+
+
+
 
 Estrutura da aplicação:
 
 MeuGerenciadorDeMetas/
 ├── aplicativo/
 │   ├── __init__.py         # Torna a pasta um módulo Python
+│   ├── main.py             # Arquivo main
+│   ├── routes.py           # Arquivo contendo rotas
 │   ├── config/
 │   │   ├── database.py     # Configuração e conexão com o PostgreSQL
 │   │   └── config.py       # Configurações gerais, incluindo JWT
 │   ├── models/
+│   │   ├──__psyache__
 │   │   ├── __init__.py     # Torna a pasta um módulo Python
 │   │   ├── usuario.py      # CRUD para a tabela Usuario
 │   │   ├── metas.py        # CRUD para a tabela Metas
